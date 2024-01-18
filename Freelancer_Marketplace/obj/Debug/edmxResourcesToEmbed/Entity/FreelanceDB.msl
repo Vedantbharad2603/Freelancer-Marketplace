@@ -9,6 +9,7 @@
           <ScalarProperty Name="freelancer_id" ColumnName="freelancer_id" />
           <ScalarProperty Name="bid_amount" ColumnName="bid_amount" />
           <ScalarProperty Name="proposal_text" ColumnName="proposal_text" />
+          <ScalarProperty Name="isapproved" ColumnName="isapproved" />
           <ScalarProperty Name="bidstime" ColumnName="bidstime" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -113,6 +114,7 @@
           <ScalarProperty Name="freelancer_id" ColumnName="freelancer_id" />
           <ScalarProperty Name="bid_amount" ColumnName="bid_amount" />
           <ScalarProperty Name="proposal_text" ColumnName="proposal_text" />
+          <ScalarProperty Name="isapproved" ColumnName="isapproved" />
           <ScalarProperty Name="bidstime" ColumnName="bidstime" />
         </ComplexTypeMapping>
       </ResultMapping>
@@ -203,8 +205,47 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SendMessage" FunctionName="Freelancer_Marketplace_DBModel.Store.SendMessage" />
+    <FunctionImportMapping FunctionImportName="SP_GetProjectsAndUserName" FunctionName="Freelancer_Marketplace_DBModel.Store.SP_GetProjectsAndUserName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Freelancer_Marketplace_DBModel.SP_GetProjectsAndUserName_Result">
+          <ScalarProperty Name="project_id" ColumnName="project_id" />
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="brand_name" ColumnName="brand_name" />
+          <ScalarProperty Name="project_description" ColumnName="project_description" />
+          <ScalarProperty Name="budget" ColumnName="budget" />
+          <ScalarProperty Name="deadline" ColumnName="deadline" />
+          <ScalarProperty Name="project_status" ColumnName="project_status" />
+          <ScalarProperty Name="date_created" ColumnName="date_created" />
+          <ScalarProperty Name="client_username" ColumnName="client_username" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SubmitBid" FunctionName="Freelancer_Marketplace_DBModel.Store.SubmitBid" />
     <FunctionImportMapping FunctionImportName="UpdateProjectStatus" FunctionName="Freelancer_Marketplace_DBModel.Store.UpdateProjectStatus" />
     <FunctionImportMapping FunctionImportName="UpdateUserProfile" FunctionName="Freelancer_Marketplace_DBModel.Store.UpdateUserProfile" />
+    <EntitySetMapping Name="takenprojects">
+      <EntityTypeMapping TypeName="Freelancer_Marketplace_DBModel.takenproject">
+        <MappingFragment StoreEntitySet="takenprojects">
+          <ScalarProperty Name="states" ColumnName="states" />
+          <ScalarProperty Name="freelancer_id" ColumnName="freelancer_id" />
+          <ScalarProperty Name="project_id" ColumnName="project_id" />
+          <ScalarProperty Name="takenprojects_id" ColumnName="takenprojects_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uploadedprojects">
+      <EntityTypeMapping TypeName="Freelancer_Marketplace_DBModel.uploadedproject">
+        <MappingFragment StoreEntitySet="uploadedproject">
+          <ScalarProperty Name="formessage" ColumnName="formessage" />
+          <ScalarProperty Name="uploadtime" ColumnName="uploadtime" />
+          <ScalarProperty Name="isverified" ColumnName="isverified" />
+          <ScalarProperty Name="filepath" ColumnName="filepath" />
+          <ScalarProperty Name="freelancer_id" ColumnName="freelancer_id" />
+          <ScalarProperty Name="project_id" ColumnName="project_id" />
+          <ScalarProperty Name="files_id" ColumnName="files_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

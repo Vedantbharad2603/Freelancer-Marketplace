@@ -82,29 +82,24 @@
 
                     <form id="loginfrm" class="mb-3">
                         <div class="mb-3">
-                            <label for="username" class="form-label">username</label>
-                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @id = "username", @placeholder = "Enter your username", @autofocus = "autofocus" })
+                            <label for="username" class="form-label">Username</label>
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @id = "username", @placeholder = "Enter your username", @autofocus = "autofocus", @value = "vedant" })
                             @Html.ValidationMessageFor(m => m.Username)
-                            @*<label for="email" class="form-label">Email or Username</label>
-            <input type="text"
-                   class="form-control"
-                   id="email"
-                   name="email-username"
-                   placeholder="Enter your email or username"
-                   autofocus />*@
                         </div>
+
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">Password</label>
                             </div>
                             <div class="input-group input-group-merge">
-                                @Html.PasswordFor(m => m.Userpass, new { @class = "form-control", @id = "password", @aria_describedby = "password" })
+                                @Html.PasswordFor(m => m.Userpass, new { @class = "form-control", @id = "password", @aria_describedby = "password", @value = "vedant123" })
                                 @Html.ValidationMessageFor(m => m.Userpass)
                                 <span class="input-group-text cursor-pointer" onclick="togglePasswordVisibility()">
                                     <i id="eyeIcon" class="ti ti-eye-off"></i>
                                 </span>
                             </div>
                         </div>
+
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="remember-me" />
@@ -112,7 +107,7 @@
                             </div>
                         </div>
                         @*<button class="btn btn-primary d-grid w-100"> <a href="index.html" style="color: #ffffff !important;"> Sign in </a></button>*@
-                    <button id="btnSub" class="btn btn-primary d-grid w-100"  type="button"> Sign in</button>
+                        <button id="btnSub" class="btn btn-primary d-grid w-100" type="button"> Sign in</button>
 
                         @Model.ErrorMsg
                     </form>
@@ -127,6 +122,7 @@
             </div>
             <!-- /Login -->
         </div>
+        <input type="hidden" id="OriginalUrl" name="OriginalUrl" value="@Session["OriginalUrl"]" />
     </div>
     @Scripts.Render("~/bundles/Loginscript2")
 </body>
@@ -151,22 +147,32 @@
         Login();
     });
     function Login() {
-        console.log($("#loginfrm").serialize());
-        $.ajax({
-            url:  '@Url.Action("Login2", "Login")',
-            type: "POST",
-            data: $("#loginfrm").serialize(),
-            success: function (result) {
-                if (result.isError) {
-                    alert(result.data);
-                }
-                else {
-                    window.location = 'User/Index';
-                }
-            },
-            error: function (e) {
-                alert("Error while login");
+    console.log($("#loginfrm").serialize());
+    $.ajax({
+        url: '@Url.Action("Login2", "Login")',
+        type: "POST",
+        data: $("#loginfrm").serialize(),
+        success: function (result) {
+            if (result.isError) {
+                alert(result.data);
             }
-        });
-    }
+            else {
+                // Get the original URL from a hidden input field or a data attribute
+                var originalUrl = $("#OriginalUrl").val();
+
+                // If an original URL is found, redirect to it; otherwise, go to a default page
+                if (originalUrl !== "") {
+                    window.location.href = originalUrl;
+                } else {
+                    window.location.href = '@Url.Action("Index", "User")';
+                }
+            }
+        },
+        error: function (e) {
+            alert("Error while login");
+        }
+    });
+}
+
+
 </script>

@@ -15,7 +15,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Vuexy - Bootstrap Admin Template</title>
+    <title>User Profile</title>
 
     <meta name="description" content="" />
 
@@ -29,7 +29,7 @@
           rel="stylesheet" />
 
 
-    @Styles.Render("~/Content/indexcss")
+    @Styles.Render("~/Content/maincss")
     @Scripts.Render("~/bundles/script1")
 
 </head>
@@ -43,9 +43,13 @@
             <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
                 <div class="container-xxl">
                     <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
-                        <a href="index.html" class="app-brand-link gap-2">
+                        <a href="Index" class="app-brand-link gap-2">
                             <span class="app-brand-logo demo">
-                                <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="32"
+                                     height="22"
+                                     viewBox="0 0 32 22"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                           clip-rule="evenodd"
                                           d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
@@ -69,7 +73,8 @@
                             <span class="app-brand-text demo menu-text fw-bold">Freelancer Marketplace</span>
                         </a>
 
-                        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
+                        <a href="javascript:void(0);"
+                           class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
                             <i class="ti ti-x ti-sm align-middle"></i>
                         </a>
                     </div>
@@ -80,9 +85,9 @@
                         </a>
                     </div>
 
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <div class="navbar-nav-right d-flex align-items-center"
+                         id="navbar-collapse">
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-
                             <!-- Search -->
                             <li class="nav-item navbar-search-wrapper me-2 me-xl-0">
                                 <a class="nav-link search-toggler" href="javascript:void(0);">
@@ -92,30 +97,38 @@
                             <!-- /Search -->
                             <!-- Style Switcher -->
                             <li class="nav-item me-2 me-xl-0">
-                                <a class="nav-link style-switcher-toggle hide-arrow" href="javascript:void(0);">
+                                <a class="nav-link style-switcher-toggle hide-arrow"
+                                   href="javascript:void(0);">
                                     <i class="ti ti-md"></i>
                                 </a>
                             </li>
                             <!--/ Style Switcher -->
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow"
+                                   href="javascript:void(0);"
+                                   data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="~/Content/assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                                        <img src="~/Content/assets/img/avatars/1.png"
+                                             alt
+                                             class="h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                                        <a class="dropdown-item"
+                                           href="Account">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="~/Content/assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                                                        <img src="~/Content/assets/img/avatars/1.png"
+                                                             alt
+                                                             class="h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
-                                                    <small class="text-muted">Admin</small>
+                                                    <span class="fw-semibold d-block">@Session["Username"]</span>
+                                                    <small class="text-muted">User</small>
                                                 </div>
                                             </div>
                                         </a>
@@ -124,13 +137,13 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="UserProfile">
+                                        <a class="dropdown-item" href="Account">
                                             <i class="ti ti-user-check me-2 ti-sm"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="accountSettings.html">
+                                        <a class="dropdown-item" href="AccountSettings">
                                             <i class="ti ti-settings me-2 ti-sm"></i>
                                             <span class="align-middle">Settings</span>
                                         </a>
@@ -140,18 +153,36 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+                                        <a class="dropdown-item" href="javascript:void(0);" onclick="logout()">
                                             <i class="ti ti-logout me-2 ti-sm"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
                                     </li>
+                                    <script>
+                                        function logout() {
+                                            // Perform an AJAX request to the server to log out
+                                            $.ajax({
+                                                url: '/User/Logout',  // Adjust the URL based on your controller action
+                                                type: 'POST',  // Use POST or GET based on your server-side implementation
+                                                success: function (result) {
+                                                    // Handle the success response, e.g., redirect to the login page
+                                                    window.location.href = result.redirectUrl;  // Adjust the property based on your server-side implementation
+                                                },
+                                                error: function () {
+                                                    // Handle errors, if any
+                                                    console.error('Failed to log out.');
+                                                }
+                                            });
+                                        }
+                                    </script>
+
                                 </ul>
                             </li>
                             <!--/ User -->
                         </ul>
                     </div>
 
-                    <!-- Search Small Screens -->
+                    
                     <div class="navbar-search-wrapper search-input-wrapper container-xxl d-none">
                         <input type="text"
                                class="form-control search-input border-0"
@@ -161,6 +192,7 @@
                     </div>
                 </div>
             </nav>
+
 
             <!-- / Navbar -->
             <!-- Layout container -->
@@ -174,7 +206,7 @@
                             <ul class="menu-inner">
                                 <!-- Home Page -->
                                 <li class="menu-item">
-                                    <a href="index.html" class="menu-link">
+                                    <a href="Index" class="menu-link">
                                         <i class="menu-icon tf-icons ti ti-smart-home"></i>
                                         <div data-i18n="Home Page">Home Page</div>
                                     </a>
@@ -182,68 +214,27 @@
 
                                 <!-- My On-Going Projects -->
                                 <li class="menu-item">
-                                    <a href="onGoingProject.html" class="menu-link">
+                                    <a href="OnGoingProject" class="menu-link">
                                         <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                                         <div data-i18n="My On-Going Projects">
                                             My On-Going Projects
                                         </div>
                                     </a>
-
-                                    <!-- <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="layouts-without-menu.html" class="menu-link">
-                                        <i class="menu-icon tf-icons ti ti-menu-2"></i>
-                                        <div data-i18n="Without menu">Without menu</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="~/Content/vertical-menu-template/" class="menu-link" target="_blank">
-                                        <i class="menu-icon tf-icons ti ti-layout-distribute-vertical"></i>
-                                        <div data-i18n="Vertical">Vertical</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="layouts-fluid.html" class="menu-link">
-                                        <i class="menu-icon tf-icons ti ti-maximize"></i>
-                                        <div data-i18n="Fluid">Fluid</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="layouts-container.html" class="menu-link">
-                                        <i class="menu-icon tf-icons ti ti-arrows-maximize"></i>
-                                        <div data-i18n="Container">Container</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="layouts-blank.html" class="menu-link">
-                                        <i class="menu-icon tf-icons ti ti-square"></i>
-                                        <div data-i18n="Blank">Blank</div>
-                                        </a>
-                                    </li>
-                                    </ul> -->
                                 </li>
 
                                 <!-- Apps -->
                                 <li class="menu-item">
-                                    <a href="Calendar.html" class="menu-link">
-                                        <i class="menu-icon tf-icons ti ti-calendar"></i>
-                                        <div data-i18n="Calendar">Calendar</div>
+                                    <a href="MyBids" class="menu-link">
+                                        <i class="menu-icon tf-icons ti ti-brand-monday"></i>
+                                        <div data-i18n="My Bids">My Bids</div>
                                     </a>
                                 </li>
 
                                 <!-- Components -->
                                 <li class="menu-item">
-                                    <a href="chat.html" class="menu-link">
+                                    <a href="Myprojects" class="menu-link">
                                         <i class="menu-icon tf-icons ti ti-messages"></i>
-                                        <div data-i18n="Chat">Chat</div>
-                                    </a>
-                                </li>
-
-                                <!-- Forms -->
-                                <li class="menu-item">
-                                    <a href="userForm.html" class="menu-link">
-                                        <i class="menu-icon tf-icons ti ti-forms"></i>
-                                        <div data-i18n="Forms">Forms</div>
+                                        <div data-i18n="My Projects">My Projects</div>
                                     </a>
                                 </li>
                             </ul>
@@ -389,112 +380,112 @@
                             <div class="col-xl-8 col-lg-7 col-md-7">
                                 <!-- Activity Timeline -->
                                 <!-- <div class="card card-action mb-4">
-                                  <div class="card-header align-items-center">
-                                    <h5 class="card-action-title mb-0">Activity Timeline</h5>
-                                    <div class="card-action-element">
-                                      <div class="dropdown">
-                                        <button
-                                          type="button"
-                                          class="btn dropdown-toggle hide-arrow p-0"
-                                          data-bs-toggle="dropdown"
-                                          aria-expanded="false"
-                                        >
-                                          <i class="ti ti-dots-vertical text-muted"></i>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Share timeline</a></li>
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Suggest edits</a></li>
-                                          <li>
-                                            <hr class="dropdown-divider" />
-                                          </li>
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Report bug</a></li>
-                                        </ul>
-                                      </div>
+                          <div class="card-header align-items-center">
+                            <h5 class="card-action-title mb-0">Activity Timeline</h5>
+                            <div class="card-action-element">
+                              <div class="dropdown">
+                                <button
+                                  type="button"
+                                  class="btn dropdown-toggle hide-arrow p-0"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                  <i class="ti ti-dots-vertical text-muted"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                  <li><a class="dropdown-item" href="javascript:void(0);">Share timeline</a></li>
+                                  <li><a class="dropdown-item" href="javascript:void(0);">Suggest edits</a></li>
+                                  <li>
+                                    <hr class="dropdown-divider" />
+                                  </li>
+                                  <li><a class="dropdown-item" href="javascript:void(0);">Report bug</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-body pb-0">
+                            <ul class="timeline ms-1 mb-0">
+                              <li class="timeline-item timeline-item-transparent">
+                                <span class="timeline-point timeline-point-primary"></span>
+                                <div class="timeline-event">
+                                  <div class="timeline-header">
+                                    <h6 class="mb-0">Client Meeting</h6>
+                                    <small class="text-muted">Today</small>
+                                  </div>
+                                  <p class="mb-2">Project meeting with john 10:15am</p>
+                                  <div class="d-flex flex-wrap">
+                                    <div class="avatar me-2">
+                                      <img src="~/Content/assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
+                                    </div>
+                                    <div class="ms-1">
+                                      <h6 class="mb-0">Lester McCarthy (Client)</h6>
+                                      <span>CEO of Infibeam</span>
                                     </div>
                                   </div>
-                                  <div class="card-body pb-0">
-                                    <ul class="timeline ms-1 mb-0">
-                                      <li class="timeline-item timeline-item-transparent">
-                                        <span class="timeline-point timeline-point-primary"></span>
-                                        <div class="timeline-event">
-                                          <div class="timeline-header">
-                                            <h6 class="mb-0">Client Meeting</h6>
-                                            <small class="text-muted">Today</small>
-                                          </div>
-                                          <p class="mb-2">Project meeting with john 10:15am</p>
-                                          <div class="d-flex flex-wrap">
-                                            <div class="avatar me-2">
-                                              <img src="~/Content/assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
-                                            </div>
-                                            <div class="ms-1">
-                                              <h6 class="mb-0">Lester McCarthy (Client)</h6>
-                                              <span>CEO of Infibeam</span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </li>
-                                      <li class="timeline-item timeline-item-transparent">
-                                        <span class="timeline-point timeline-point-success"></span>
-                                        <div class="timeline-event">
-                                          <div class="timeline-header">
-                                            <h6 class="mb-0">Create a new project for client</h6>
-                                            <small class="text-muted">2 Day Ago</small>
-                                          </div>
-                                          <p class="mb-0">Add files to new design folder</p>
-                                        </div>
-                                      </li>
-                                      <li class="timeline-item timeline-item-transparent">
-                                        <span class="timeline-point timeline-point-danger"></span>
-                                        <div class="timeline-event">
-                                          <div class="timeline-header">
-                                            <h6 class="mb-0">Shared 2 New Project Files</h6>
-                                            <small class="text-muted">6 Day Ago</small>
-                                          </div>
-                                          <p class="mb-2">
-                                            Sent by Mollie Dixon
-                                            <img
-                                              src="~/Content/assets/img/avatars/4.png"
-                                              class="rounded-circle me-3"
-                                              alt="avatar"
-                                              height="24"
-                                              width="24"
-                                            />
-                                          </p>
-                                          <div class="d-flex flex-wrap gap-2 pt-1">
-                                            <a href="javascript:void(0)" class="me-3">
-                                              <img
-                                                src="~/Content/assets/img/icons/misc/doc.png"
-                                                alt="Document image"
-                                                width="15"
-                                                class="me-2"
-                                              />
-                                              <span class="fw-semibold text-heading">App Guidelines</span>
-                                            </a>
-                                            <a href="javascript:void(0)">
-                                              <img
-                                                src="~/Content/assets/img/icons/misc/xls.png"
-                                                alt="Excel image"
-                                                width="15"
-                                                class="me-2"
-                                              />
-                                              <span class="fw-semibold text-heading">Testing Results</span>
-                                            </a>
-                                          </div>
-                                        </div>
-                                      </li>
-                                      <li class="timeline-item timeline-item-transparent border-0">
-                                        <span class="timeline-point timeline-point-info"></span>
-                                        <div class="timeline-event">
-                                          <div class="timeline-header">
-                                            <h6 class="mb-0">Project status updated</h6>
-                                            <small class="text-muted">10 Day Ago</small>
-                                          </div>
-                                          <p class="mb-0">Woocommerce iOS App Completed</p>
-                                        </div>
-                                      </li>
-                                    </ul>
+                                </div>
+                              </li>
+                              <li class="timeline-item timeline-item-transparent">
+                                <span class="timeline-point timeline-point-success"></span>
+                                <div class="timeline-event">
+                                  <div class="timeline-header">
+                                    <h6 class="mb-0">Create a new project for client</h6>
+                                    <small class="text-muted">2 Day Ago</small>
                                   </div>
-                                </div> -->
+                                  <p class="mb-0">Add files to new design folder</p>
+                                </div>
+                              </li>
+                              <li class="timeline-item timeline-item-transparent">
+                                <span class="timeline-point timeline-point-danger"></span>
+                                <div class="timeline-event">
+                                  <div class="timeline-header">
+                                    <h6 class="mb-0">Shared 2 New Project Files</h6>
+                                    <small class="text-muted">6 Day Ago</small>
+                                  </div>
+                                  <p class="mb-2">
+                                    Sent by Mollie Dixon
+                                    <img
+                                      src="~/Content/assets/img/avatars/4.png"
+                                      class="rounded-circle me-3"
+                                      alt="avatar"
+                                      height="24"
+                                      width="24"
+                                    />
+                                  </p>
+                                  <div class="d-flex flex-wrap gap-2 pt-1">
+                                    <a href="javascript:void(0)" class="me-3">
+                                      <img
+                                        src="~/Content/assets/img/icons/misc/doc.png"
+                                        alt="Document image"
+                                        width="15"
+                                        class="me-2"
+                                      />
+                                      <span class="fw-semibold text-heading">App Guidelines</span>
+                                    </a>
+                                    <a href="javascript:void(0)">
+                                      <img
+                                        src="~/Content/assets/img/icons/misc/xls.png"
+                                        alt="Excel image"
+                                        width="15"
+                                        class="me-2"
+                                      />
+                                      <span class="fw-semibold text-heading">Testing Results</span>
+                                    </a>
+                                  </div>
+                                </div>
+                              </li>
+                              <li class="timeline-item timeline-item-transparent border-0">
+                                <span class="timeline-point timeline-point-info"></span>
+                                <div class="timeline-event">
+                                  <div class="timeline-header">
+                                    <h6 class="mb-0">Project status updated</h6>
+                                    <small class="text-muted">10 Day Ago</small>
+                                  </div>
+                                  <p class="mb-0">Woocommerce iOS App Completed</p>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div> -->
                                 <!--/ Activity Timeline -->
                                 <div class="row">
                                     <!-- Connections -->
@@ -624,159 +615,159 @@
                                     <!--/ Connections -->
                                     <!-- Teams -->
                                     <!-- <div class="col-lg-12 col-xl-6">
-                                      <div class="card card-action mb-4">
-                                        <div class="card-header align-items-center">
-                                          <h5 class="card-action-title mb-0">Teams</h5>
-                                          <div class="card-action-element">
-                                            <div class="dropdown">
-                                              <button
-                                                type="button"
-                                                class="btn dropdown-toggle hide-arrow p-0"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                              >
-                                                <i class="ti ti-dots-vertical text-muted"></i>
-                                              </button>
-                                              <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item" href="javascript:void(0);">Share teams</a></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);">Suggest edits</a></li>
-                                                <li>
-                                                  <hr class="dropdown-divider" />
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:void(0);">Report bug</a></li>
-                                              </ul>
-                                            </div>
+                              <div class="card card-action mb-4">
+                                <div class="card-header align-items-center">
+                                  <h5 class="card-action-title mb-0">Teams</h5>
+                                  <div class="card-action-element">
+                                    <div class="dropdown">
+                                      <button
+                                        type="button"
+                                        class="btn dropdown-toggle hide-arrow p-0"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i class="ti ti-dots-vertical text-muted"></i>
+                                      </button>
+                                      <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Share teams</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Suggest edits</a></li>
+                                        <li>
+                                          <hr class="dropdown-divider" />
+                                        </li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Report bug</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="card-body">
+                                  <ul class="list-unstyled mb-0">
+                                    <li class="mb-3">
+                                      <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-start">
+                                          <div class="avatar me-2">
+                                            <img
+                                              src="~/Content/assets/img/icons/brands/react-label.png"
+                                              alt="Avatar"
+                                              class="rounded-circle"
+                                            />
+                                          </div>
+                                          <div class="me-2 ms-1">
+                                            <h6 class="mb-0">React Developers</h6>
+                                            <small class="text-muted">72 Members</small>
                                           </div>
                                         </div>
-                                        <div class="card-body">
-                                          <ul class="list-unstyled mb-0">
-                                            <li class="mb-3">
-                                              <div class="d-flex align-items-center">
-                                                <div class="d-flex align-items-start">
-                                                  <div class="avatar me-2">
-                                                    <img
-                                                      src="~/Content/assets/img/icons/brands/react-label.png"
-                                                      alt="Avatar"
-                                                      class="rounded-circle"
-                                                    />
-                                                  </div>
-                                                  <div class="me-2 ms-1">
-                                                    <h6 class="mb-0">React Developers</h6>
-                                                    <small class="text-muted">72 Members</small>
-                                                  </div>
-                                                </div>
-                                                <div class="ms-auto">
-                                                  <a href="javascript:;"><span class="badge bg-label-danger">Developer</span></a>
-                                                </div>
-                                              </div>
-                                            </li>
-                                            <li class="mb-3">
-                                              <div class="d-flex align-items-center">
-                                                <div class="d-flex align-items-start">
-                                                  <div class="avatar me-2">
-                                                    <img
-                                                      src="~/Content/assets/img/icons/brands/support-label.png"
-                                                      alt="Avatar"
-                                                      class="rounded-circle"
-                                                    />
-                                                  </div>
-                                                  <div class="me-2 ms-1">
-                                                    <h6 class="mb-0">Support Team</h6>
-                                                    <small class="text-muted">122 Members</small>
-                                                  </div>
-                                                </div>
-                                                <div class="ms-auto">
-                                                  <a href="javascript:;"><span class="badge bg-label-primary">Support</span></a>
-                                                </div>
-                                              </div>
-                                            </li>
-                                            <li class="mb-3">
-                                              <div class="d-flex align-items-center">
-                                                <div class="d-flex align-items-start">
-                                                  <div class="avatar me-2">
-                                                    <img
-                                                      src="~/Content/assets/img/icons/brands/figma-label.png"
-                                                      alt="Avatar"
-                                                      class="rounded-circle"
-                                                    />
-                                                  </div>
-                                                  <div class="me-2 ms-1">
-                                                    <h6 class="mb-0">UI Designers</h6>
-                                                    <small class="text-muted">7 Members</small>
-                                                  </div>
-                                                </div>
-                                                <div class="ms-auto">
-                                                  <a href="javascript:;"><span class="badge bg-label-info">Designer</span></a>
-                                                </div>
-                                              </div>
-                                            </li>
-                                            <li class="mb-3">
-                                              <div class="d-flex align-items-center">
-                                                <div class="d-flex align-items-start">
-                                                  <div class="avatar me-2">
-                                                    <img
-                                                      src="~/Content/assets/img/icons/brands/vue-label.png"
-                                                      alt="Avatar"
-                                                      class="rounded-circle"
-                                                    />
-                                                  </div>
-                                                  <div class="me-2 ms-1">
-                                                    <h6 class="mb-0">Vue.js Developers</h6>
-                                                    <small class="text-muted">289 Members</small>
-                                                  </div>
-                                                </div>
-                                                <div class="ms-auto">
-                                                  <a href="javascript:;"><span class="badge bg-label-danger">Developer</span></a>
-                                                </div>
-                                              </div>
-                                            </li>
-                                            <li class="mb-3">
-                                              <div class="d-flex align-items-center">
-                                                <div class="d-flex align-items-start">
-                                                  <div class="avatar me-2">
-                                                    <img
-                                                      src="~/Content/assets/img/icons/brands/twitter-label.png"
-                                                      alt="Avatar"
-                                                      class="rounded-circle"
-                                                    />
-                                                  </div>
-                                                  <div class="me-2 ms-1">
-                                                    <h6 class="mb-0">Digital Marketing</h6>
-                                                    <small class="text-muted">24 Members</small>
-                                                  </div>
-                                                </div>
-                                                <div class="ms-auto">
-                                                  <a href="javascript:;"><span class="badge bg-label-secondary">Marketing</span></a>
-                                                </div>
-                                              </div>
-                                            </li>
-                                            <li class="text-center">
-                                              <a href="javascript:;">View all teams</a>
-                                            </li>
-                                          </ul>
+                                        <div class="ms-auto">
+                                          <a href="javascript:;"><span class="badge bg-label-danger">Developer</span></a>
                                         </div>
                                       </div>
-                                    </div> -->
+                                    </li>
+                                    <li class="mb-3">
+                                      <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-start">
+                                          <div class="avatar me-2">
+                                            <img
+                                              src="~/Content/assets/img/icons/brands/support-label.png"
+                                              alt="Avatar"
+                                              class="rounded-circle"
+                                            />
+                                          </div>
+                                          <div class="me-2 ms-1">
+                                            <h6 class="mb-0">Support Team</h6>
+                                            <small class="text-muted">122 Members</small>
+                                          </div>
+                                        </div>
+                                        <div class="ms-auto">
+                                          <a href="javascript:;"><span class="badge bg-label-primary">Support</span></a>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li class="mb-3">
+                                      <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-start">
+                                          <div class="avatar me-2">
+                                            <img
+                                              src="~/Content/assets/img/icons/brands/figma-label.png"
+                                              alt="Avatar"
+                                              class="rounded-circle"
+                                            />
+                                          </div>
+                                          <div class="me-2 ms-1">
+                                            <h6 class="mb-0">UI Designers</h6>
+                                            <small class="text-muted">7 Members</small>
+                                          </div>
+                                        </div>
+                                        <div class="ms-auto">
+                                          <a href="javascript:;"><span class="badge bg-label-info">Designer</span></a>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li class="mb-3">
+                                      <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-start">
+                                          <div class="avatar me-2">
+                                            <img
+                                              src="~/Content/assets/img/icons/brands/vue-label.png"
+                                              alt="Avatar"
+                                              class="rounded-circle"
+                                            />
+                                          </div>
+                                          <div class="me-2 ms-1">
+                                            <h6 class="mb-0">Vue.js Developers</h6>
+                                            <small class="text-muted">289 Members</small>
+                                          </div>
+                                        </div>
+                                        <div class="ms-auto">
+                                          <a href="javascript:;"><span class="badge bg-label-danger">Developer</span></a>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li class="mb-3">
+                                      <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-start">
+                                          <div class="avatar me-2">
+                                            <img
+                                              src="~/Content/assets/img/icons/brands/twitter-label.png"
+                                              alt="Avatar"
+                                              class="rounded-circle"
+                                            />
+                                          </div>
+                                          <div class="me-2 ms-1">
+                                            <h6 class="mb-0">Digital Marketing</h6>
+                                            <small class="text-muted">24 Members</small>
+                                          </div>
+                                        </div>
+                                        <div class="ms-auto">
+                                          <a href="javascript:;"><span class="badge bg-label-secondary">Marketing</span></a>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li class="text-center">
+                                      <a href="javascript:;">View all teams</a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div> -->
                                     <!--/ Teams -->
                                 </div>
                                 <!-- Projects table -->
                                 @*<div class="card mb-4">
-                                    <div class="card-datatable table-responsive">
-                                        <table class="datatables-projects table border-top">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th>Name</th>
-                                                    <th>Leader</th>
-                                                    <th>Team</th>
-                                                    <th class="w-px-200">Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>*@
+                                <div class="card-datatable table-responsive">
+                                    <table class="datatables-projects table border-top">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Name</th>
+                                                <th>Leader</th>
+                                                <th>Team</th>
+                                                <th class="w-px-200">Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>*@
                                 <!--/ Projects table -->
                             </div>
                         </div>
@@ -814,7 +805,7 @@
                                         <script>
                                             document.write(new Date().getFullYear());
                                         </script>
-                                        © Pixinvent
+
                                     </p>
                                 </div>
                                 <div class="col-12 col-sm-6 col-md-3 mb-4 mb-md-0">
@@ -876,6 +867,6 @@
     <!-- Drag Target Area To SlideIn Menu On Small Screens -->
     <div class="drag-target"></div>
 
-    @Scripts.Render("~/bundles/indexscript2")
+    @Scripts.Render("~/bundles/mainscript2")
 </body>
 </html>

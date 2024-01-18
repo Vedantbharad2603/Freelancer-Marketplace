@@ -142,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entity\bid.cs">
       <DependentUpon>FreelanceDB.tt</DependentUpon>
@@ -197,6 +198,15 @@
     <Compile Include="Entity\reviews_ratings.cs">
       <DependentUpon>FreelanceDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\SP_GetProjectsAndUserName_Result.cs">
+      <DependentUpon>FreelanceDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\takenproject.cs">
+      <DependentUpon>FreelanceDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\uploadedproject.cs">
+      <DependentUpon>FreelanceDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\usersdata.cs">
       <DependentUpon>FreelanceDB.tt</DependentUpon>
     </Compile>
@@ -206,8 +216,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BidTheProjectViewModel.cs" />
+    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\MyBidsViewModel.cs" />
+    <Compile Include="Models\OnGoingProjectViewModel.cs" />
+    <Compile Include="Models\ProjectBidViewModel.cs" />
+    <Compile Include="Models\ProjectViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\ShowBidOfMyProjectViewModel.cs" />
+    <Compile Include="Models\UploadedDataViewModel.cs" />
+    <Compile Include="Models\UploadWorkViewModel.cs" />
+    <Compile Include="Models\UserProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3007,6 +3028,22 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\User\OnGoingProject.cshtml" />
+    <Content Include="Views\User\UserProfileProject.cshtml" />
+    <Content Include="Views\User\UserProfileConnections.cshtml" />
+    <Content Include="Views\User\UserProfileTeams.cshtml" />
+    <Content Include="Views\User\Account.cshtml" />
+    <Content Include="Views\User\AccountSettings.cshtml" />
+    <Content Include="Views\User\BidTheProject.cshtml" />
+    <Content Include="Views\Register\Register.cshtml" />
+    <Content Include="Views\User\MyBids.cshtml" />
+    <Content Include="Views\User\Myprojects.cshtml" />
+    <Content Include="Views\User\UploadWork.cshtml" />
+    <Content Include="Views\User\AddProject.cshtml" />
+    <Content Include="Views\User\EditProject.cshtml" />
+    <Content Include="Views\User\ShowMyProjectBid.cshtml" />
+    <Content Include="Views\User\ShowUploadedData.cshtml" />
+    <Content Include="Views\User\AccountSettingsSecurity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

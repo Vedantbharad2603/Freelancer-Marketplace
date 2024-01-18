@@ -17,7 +17,7 @@ $(function () {
 
   // Datepicker for advanced filter
   var rangePickr = $('.flatpickr-range'),
-    dateFormat = 'MM/DD/YYYY';
+    dateFormat = 'dd/MM/yyyy';
 
   if (rangePickr.length) {
     rangePickr.flatpickr({
@@ -31,11 +31,11 @@ $(function () {
         var startDate = '',
           endDate = new Date();
         if (selectedDates[0] != undefined) {
-          startDate = moment(selectedDates[0]).format('MM/DD/YYYY');
+          startDate = moment(selectedDates[0]).format('dd/MM/yyyy');
           startDateEle.val(startDate);
         }
         if (selectedDates[1] != undefined) {
-          endDate = moment(selectedDates[1]).format('MM/DD/YYYY');
+          endDate = moment(selectedDates[1]).format('dd/MM/yyyy');
           endDateEle.val(endDate);
         }
         $(rangePickr).trigger('change').trigger('keyup');

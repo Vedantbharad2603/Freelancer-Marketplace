@@ -18,6 +18,8 @@ namespace Freelancer_Marketplace.Entity
         public project()
         {
             this.bids = new HashSet<bid>();
+            this.takenprojects = new HashSet<takenproject>();
+            this.uploadedprojects = new HashSet<uploadedproject>();
         }
     
         public int project_id { get; set; }
@@ -33,5 +35,9 @@ namespace Freelancer_Marketplace.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bid> bids { get; set; }
         public virtual usersdata usersdata { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<takenproject> takenprojects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<uploadedproject> uploadedprojects { get; set; }
     }
 }

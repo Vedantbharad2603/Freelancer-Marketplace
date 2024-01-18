@@ -204,7 +204,7 @@ $(function () {
       timePicker: true,
       timePickerIncrement: 30,
       locale: {
-        format: 'MM/DD/YYYY h:mm A'
+        format: 'dd/MM/yyyy h:mm A'
       },
       opens: isRtl ? 'left' : 'right'
     });

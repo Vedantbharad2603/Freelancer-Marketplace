@@ -35,6 +35,8 @@ namespace Freelancer_Marketplace.Entity
         public virtual DbSet<reviews_ratings> reviews_ratings { get; set; }
         public virtual DbSet<user_profiles> user_profiles { get; set; }
         public virtual DbSet<usersdata> usersdatas { get; set; }
+        public virtual DbSet<takenproject> takenprojects { get; set; }
+        public virtual DbSet<uploadedproject> uploadedprojects { get; set; }
     
         public virtual int AddReviewAndRating(Nullable<int> reviewedUserID, Nullable<int> reviewerID, Nullable<int> ratingScore)
         {
@@ -173,6 +175,11 @@ namespace Freelancer_Marketplace.Entity
                 new ObjectParameter("chattime", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SendMessage", senderIDParameter, recipientIDParameter, messageContentParameter, chattimeParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetProjectsAndUserName_Result> SP_GetProjectsAndUserName()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetProjectsAndUserName_Result>("SP_GetProjectsAndUserName");
         }
     
         public virtual int SubmitBid(Nullable<int> projectID, Nullable<int> freelancerID, Nullable<decimal> bidAmount, string proposalText, Nullable<System.DateTime> bidTime)

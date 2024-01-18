@@ -712,7 +712,7 @@
         }
 
         var l = Object.assign({}, {
-          format: a.element && a.element.getAttribute("type") === "date" ? "YYYY-MM-DD" : "MM/DD/YYYY",
+          format: a.element && a.element.getAttribute("type") === "date" ? "YYYY-MM-DD" : "dd/MM/yyyy",
           message: ""
         }, a.options);
         var o = a.l10n ? a.l10n.date["default"] : l.message;

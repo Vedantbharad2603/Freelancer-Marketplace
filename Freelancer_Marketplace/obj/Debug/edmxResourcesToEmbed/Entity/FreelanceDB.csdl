@@ -9,9 +9,10 @@
     <Property Name="freelancer_id" Type="Int32" Nullable="false" />
     <Property Name="bid_amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="proposal_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="isapproved" Type="Boolean" />
     <Property Name="bidstime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="usersdata" Relationship="Self.FK__bids__freelancer__6DCC4D03" FromRole="bids" ToRole="usersdata" />
-    <NavigationProperty Name="project" Relationship="Self.FK__bids__project_id__6CD828CA" FromRole="bids" ToRole="projects" />
+    <NavigationProperty Name="usersdata" Relationship="Self.FK__bids__freelancer__0B5CAFEA" FromRole="bids" ToRole="usersdata" />
+    <NavigationProperty Name="project" Relationship="Self.FK__bids__project_id__0A688BB1" FromRole="bids" ToRole="projects" />
   </EntityType>
   <EntityType Name="calendar_events">
     <Key>
@@ -59,8 +60,10 @@
     <Property Name="deadline" Type="DateTime" Precision="0" />
     <Property Name="project_status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="date_created" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="bids" Relationship="Self.FK__bids__project_id__6CD828CA" FromRole="projects" ToRole="bids" />
+    <NavigationProperty Name="bids" Relationship="Self.FK__bids__project_id__0A688BB1" FromRole="projects" ToRole="bids" />
     <NavigationProperty Name="usersdata" Relationship="Self.FK__projects__client__69FBBC1F" FromRole="projects" ToRole="usersdata" />
+    <NavigationProperty Name="takenprojects" Relationship="Freelancer_Marketplace_DBModel.FK__takenproj__proje__1C873BEC" FromRole="project" ToRole="takenproject" />
+    <NavigationProperty Name="uploadedprojects" Relationship="Freelancer_Marketplace_DBModel.FK__uploadedp__proje__2057CCD0" FromRole="project" ToRole="uploadedproject" />
   </EntityType>
   <EntityType Name="reported_issues">
     <Key>
@@ -128,7 +131,7 @@
     <Property Name="registration_date" Type="DateTime" Precision="3" />
     <Property Name="last_login_date" Type="DateTime" Precision="3" />
     <Property Name="is_active" Type="Boolean" />
-    <NavigationProperty Name="bids" Relationship="Self.FK__bids__freelancer__6DCC4D03" FromRole="usersdata" ToRole="bids" />
+    <NavigationProperty Name="bids" Relationship="Self.FK__bids__freelancer__0B5CAFEA" FromRole="usersdata" ToRole="bids" />
     <NavigationProperty Name="calendar_events" Relationship="Self.FK__calendar___useri__14270015" FromRole="usersdata" ToRole="calendar_events" />
     <NavigationProperty Name="calendar_events1" Relationship="Self.FK__calendar___useri__3587F3E0" FromRole="usersdata" ToRole="calendar_events" />
     <NavigationProperty Name="calendar_events2" Relationship="Self.FK__calendar___useri__367C1819" FromRole="usersdata" ToRole="calendar_events" />
@@ -162,8 +165,10 @@
     <NavigationProperty Name="user_profiles1" Relationship="Self.FK__user_prof__user___44CA3770" FromRole="usersdata" ToRole="user_profiles" />
     <NavigationProperty Name="user_profiles2" Relationship="Self.FK__user_prof__user___45BE5BA9" FromRole="usersdata" ToRole="user_profiles" />
     <NavigationProperty Name="user_profiles3" Relationship="Self.FK__user_prof__user___7F2BE32F" FromRole="usersdata" ToRole="user_profiles" />
+    <NavigationProperty Name="takenprojects" Relationship="Freelancer_Marketplace_DBModel.FK__takenproj__freel__1B9317B3" FromRole="usersdata" ToRole="takenproject" />
+    <NavigationProperty Name="uploadedprojects" Relationship="Freelancer_Marketplace_DBModel.FK__uploadedp__freel__1F63A897" FromRole="usersdata" ToRole="uploadedproject" />
   </EntityType>
-  <Association Name="FK__bids__freelancer__6DCC4D03">
+  <Association Name="FK__bids__freelancer__0B5CAFEA">
     <End Role="usersdata" Type="Self.usersdata" Multiplicity="1" />
     <End Role="bids" Type="Self.bid" Multiplicity="*" />
     <ReferentialConstraint>
@@ -175,7 +180,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__bids__project_id__6CD828CA">
+  <Association Name="FK__bids__project_id__0A688BB1">
     <End Role="projects" Type="Self.project" Multiplicity="1" />
     <End Role="bids" Type="Self.bid" Multiplicity="*" />
     <ReferentialConstraint>
@@ -592,11 +597,11 @@
     <EntitySet Name="reviews_ratings" EntityType="Self.reviews_ratings" />
     <EntitySet Name="user_profiles" EntityType="Self.user_profiles" />
     <EntitySet Name="usersdatas" EntityType="Self.usersdata" />
-    <AssociationSet Name="FK__bids__freelancer__6DCC4D03" Association="Self.FK__bids__freelancer__6DCC4D03">
+    <AssociationSet Name="FK__bids__freelancer__0B5CAFEA" Association="Self.FK__bids__freelancer__0B5CAFEA">
       <End Role="usersdata" EntitySet="usersdatas" />
       <End Role="bids" EntitySet="bids" />
     </AssociationSet>
-    <AssociationSet Name="FK__bids__project_id__6CD828CA" Association="Self.FK__bids__project_id__6CD828CA">
+    <AssociationSet Name="FK__bids__project_id__0A688BB1" Association="Self.FK__bids__project_id__0A688BB1">
       <End Role="projects" EntitySet="projects" />
       <End Role="bids" EntitySet="bids" />
     </AssociationSet>
@@ -775,6 +780,7 @@
       <Parameter Name="messageContent" Mode="In" Type="String" />
       <Parameter Name="chattime" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <FunctionImport Name="SP_GetProjectsAndUserName" ReturnType="Collection(Freelancer_Marketplace_DBModel.SP_GetProjectsAndUserName_Result)" />
     <FunctionImport Name="SubmitBid">
       <Parameter Name="projectID" Mode="In" Type="Int32" />
       <Parameter Name="freelancerID" Mode="In" Type="Int32" />
@@ -794,6 +800,24 @@
       <Parameter Name="newContactInfo" Mode="In" Type="String" />
       <Parameter Name="newSocialLinks" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="takenprojects" EntityType="Freelancer_Marketplace_DBModel.takenproject" />
+    <AssociationSet Name="FK__takenproj__proje__1C873BEC" Association="Freelancer_Marketplace_DBModel.FK__takenproj__proje__1C873BEC">
+      <End Role="project" EntitySet="projects" />
+      <End Role="takenproject" EntitySet="takenprojects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__takenproj__freel__1B9317B3" Association="Freelancer_Marketplace_DBModel.FK__takenproj__freel__1B9317B3">
+      <End Role="usersdata" EntitySet="usersdatas" />
+      <End Role="takenproject" EntitySet="takenprojects" />
+    </AssociationSet>
+    <EntitySet Name="uploadedprojects" EntityType="Freelancer_Marketplace_DBModel.uploadedproject" />
+    <AssociationSet Name="FK__uploadedp__proje__2057CCD0" Association="Freelancer_Marketplace_DBModel.FK__uploadedp__proje__2057CCD0">
+      <End Role="project" EntitySet="projects" />
+      <End Role="uploadedproject" EntitySet="uploadedprojects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__uploadedp__freel__1F63A897" Association="Freelancer_Marketplace_DBModel.FK__uploadedp__freel__1F63A897">
+      <End Role="usersdata" EntitySet="usersdatas" />
+      <End Role="uploadedproject" EntitySet="uploadedprojects" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="GetBidsForProject_Result">
     <Property Type="Int32" Name="bid_id" Nullable="false" />
@@ -801,6 +825,7 @@
     <Property Type="Int32" Name="freelancer_id" Nullable="false" />
     <Property Type="Decimal" Name="bid_amount" Nullable="false" Precision="10" Scale="2" />
     <Property Type="String" Name="proposal_text" Nullable="true" MaxLength="Max" />
+    <Property Type="Boolean" Name="isapproved" Nullable="true" />
     <Property Type="DateTime" Name="bidstime" Nullable="true" Precision="23" />
   </ComplexType>
   <ComplexType Name="GetMessagesInConversation_Result">
@@ -864,4 +889,89 @@
     <Property Type="String" Name="project_status" Nullable="true" MaxLength="255" />
     <Property Type="DateTime" Name="date_created" Nullable="true" />
   </ComplexType>
+  <ComplexType Name="SP_GetProjectsAndUserName_Result">
+    <Property Type="Int32" Name="project_id" Nullable="false" />
+    <Property Type="Int32" Name="client_id" Nullable="false" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="brand_name" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="project_description" Nullable="true" MaxLength="Max" />
+    <Property Type="Decimal" Name="budget" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="DateTime" Name="deadline" Nullable="true" />
+    <Property Type="String" Name="project_status" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="date_created" Nullable="true" />
+    <Property Type="String" Name="client_username" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <EntityType Name="takenproject">
+    <Key>
+      <PropertyRef Name="takenprojects_id" />
+    </Key>
+    <Property Name="takenprojects_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="project_id" Type="Int32" Nullable="false" />
+    <Property Name="freelancer_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="project" Relationship="Freelancer_Marketplace_DBModel.FK__takenproj__proje__1C873BEC" FromRole="takenproject" ToRole="project" />
+    <NavigationProperty Name="usersdata" Relationship="Freelancer_Marketplace_DBModel.FK__takenproj__freel__1B9317B3" FromRole="takenproject" ToRole="usersdata" />
+    <Property Name="states" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__takenproj__proje__1C873BEC">
+    <End Type="Freelancer_Marketplace_DBModel.project" Role="project" Multiplicity="1" />
+    <End Type="Freelancer_Marketplace_DBModel.takenproject" Role="takenproject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="project_id" />
+      </Principal>
+      <Dependent Role="takenproject">
+        <PropertyRef Name="project_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__takenproj__freel__1B9317B3">
+    <End Type="Freelancer_Marketplace_DBModel.usersdata" Role="usersdata" Multiplicity="1" />
+    <End Type="Freelancer_Marketplace_DBModel.takenproject" Role="takenproject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usersdata">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="takenproject">
+        <PropertyRef Name="freelancer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="uploadedproject">
+    <Key>
+      <PropertyRef Name="files_id" />
+    </Key>
+    <Property Name="files_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="project_id" Type="Int32" Nullable="false" />
+    <Property Name="freelancer_id" Type="Int32" Nullable="false" />
+    <Property Name="filepath" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="isverified" Type="Boolean" Nullable="false" />
+    <Property Name="uploadtime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="project" Relationship="Freelancer_Marketplace_DBModel.FK__uploadedp__proje__2057CCD0" FromRole="uploadedproject" ToRole="project" />
+    <NavigationProperty Name="usersdata" Relationship="Freelancer_Marketplace_DBModel.FK__uploadedp__freel__1F63A897" FromRole="uploadedproject" ToRole="usersdata" />
+    <Property Name="formessage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__uploadedp__proje__2057CCD0">
+    <End Type="Freelancer_Marketplace_DBModel.project" Role="project" Multiplicity="1" />
+    <End Type="Freelancer_Marketplace_DBModel.uploadedproject" Role="uploadedproject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="project_id" />
+      </Principal>
+      <Dependent Role="uploadedproject">
+        <PropertyRef Name="project_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__uploadedp__freel__1F63A897">
+    <End Type="Freelancer_Marketplace_DBModel.usersdata" Role="usersdata" Multiplicity="1" />
+    <End Type="Freelancer_Marketplace_DBModel.uploadedproject" Role="uploadedproject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usersdata">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="uploadedproject">
+        <PropertyRef Name="freelancer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

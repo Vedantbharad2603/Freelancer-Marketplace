@@ -51,6 +51,8 @@ namespace Freelancer_Marketplace.Entity
             this.user_profiles1 = new HashSet<user_profiles>();
             this.user_profiles2 = new HashSet<user_profiles>();
             this.user_profiles3 = new HashSet<user_profiles>();
+            this.takenprojects = new HashSet<takenproject>();
+            this.uploadedprojects = new HashSet<uploadedproject>();
         }
     
         public int userid { get; set; }
@@ -130,5 +132,9 @@ namespace Freelancer_Marketplace.Entity
         public virtual ICollection<user_profiles> user_profiles2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user_profiles> user_profiles3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<takenproject> takenprojects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<uploadedproject> uploadedprojects { get; set; }
     }
 }

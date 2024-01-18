@@ -9,6 +9,7 @@
     <Property Name="freelancer_id" Type="int" Nullable="false" />
     <Property Name="bid_amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="proposal_text" Type="text" />
+    <Property Name="isapproved" Type="bit" />
     <Property Name="bidstime" Type="datetime" />
   </EntityType>
   <EntityType Name="calendar_events">
@@ -66,6 +67,27 @@
     <Property Name="reviewer_id" Type="int" Nullable="false" />
     <Property Name="rating_score" Type="int" />
   </EntityType>
+  <EntityType Name="takenprojects">
+    <Key>
+      <PropertyRef Name="takenprojects_id" />
+    </Key>
+    <Property Name="takenprojects_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="project_id" Type="int" Nullable="false" />
+    <Property Name="freelancer_id" Type="int" Nullable="false" />
+    <Property Name="states" Type="int" />
+  </EntityType>
+  <EntityType Name="uploadedproject">
+    <Key>
+      <PropertyRef Name="files_id" />
+    </Key>
+    <Property Name="files_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="project_id" Type="int" Nullable="false" />
+    <Property Name="freelancer_id" Type="int" Nullable="false" />
+    <Property Name="filepath" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="isverified" Type="bit" Nullable="false" />
+    <Property Name="uploadtime" Type="datetime" Nullable="false" />
+    <Property Name="formessage" Type="nvarchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="user_profiles">
     <Key>
       <PropertyRef Name="profile_id" />
@@ -93,7 +115,7 @@
     <Property Name="last_login_date" Type="datetime" />
     <Property Name="is_active" Type="bit" />
   </EntityType>
-  <Association Name="FK__bids__freelancer__6DCC4D03">
+  <Association Name="FK__bids__freelancer__0B5CAFEA">
     <End Role="usersdata" Type="Self.usersdata" Multiplicity="1" />
     <End Role="bids" Type="Self.bids" Multiplicity="*" />
     <ReferentialConstraint>
@@ -105,7 +127,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__bids__project_id__6CD828CA">
+  <Association Name="FK__bids__project_id__0A688BB1">
     <End Role="projects" Type="Self.projects" Multiplicity="1" />
     <End Role="bids" Type="Self.bids" Multiplicity="*" />
     <ReferentialConstraint>
@@ -465,6 +487,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__takenproj__freel__1B9317B3">
+    <End Role="usersdata" Type="Self.usersdata" Multiplicity="1" />
+    <End Role="takenprojects" Type="Self.takenprojects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usersdata">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="takenprojects">
+        <PropertyRef Name="freelancer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__takenproj__proje__1C873BEC">
+    <End Role="projects" Type="Self.projects" Multiplicity="1" />
+    <End Role="takenprojects" Type="Self.takenprojects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="project_id" />
+      </Principal>
+      <Dependent Role="takenprojects">
+        <PropertyRef Name="project_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__uploadedp__freel__1F63A897">
+    <End Role="usersdata" Type="Self.usersdata" Multiplicity="1" />
+    <End Role="uploadedproject" Type="Self.uploadedproject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usersdata">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="uploadedproject">
+        <PropertyRef Name="freelancer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__uploadedp__proje__2057CCD0">
+    <End Role="projects" Type="Self.projects" Multiplicity="1" />
+    <End Role="uploadedproject" Type="Self.uploadedproject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="project_id" />
+      </Principal>
+      <Dependent Role="uploadedproject">
+        <PropertyRef Name="project_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__user_prof__user___1BC821DD">
     <End Role="usersdata" Type="Self.usersdata" Multiplicity="1" />
     <End Role="user_profiles" Type="Self.user_profiles" Multiplicity="*" />
@@ -556,6 +626,7 @@
     <Parameter Name="messageContent" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="chattime" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="SP_GetProjectsAndUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SubmitBid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="projectID" Type="int" Mode="In" />
     <Parameter Name="freelancerID" Type="int" Mode="In" />
@@ -582,13 +653,15 @@
     <EntitySet Name="projects" EntityType="Self.projects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="reported_issues" EntityType="Self.reported_issues" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="reviews_ratings" EntityType="Self.reviews_ratings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="takenprojects" EntityType="Self.takenprojects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="uploadedproject" EntityType="Self.uploadedproject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user_profiles" EntityType="Self.user_profiles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usersdata" EntityType="Self.usersdata" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__bids__freelancer__6DCC4D03" Association="Self.FK__bids__freelancer__6DCC4D03">
+    <AssociationSet Name="FK__bids__freelancer__0B5CAFEA" Association="Self.FK__bids__freelancer__0B5CAFEA">
       <End Role="usersdata" EntitySet="usersdata" />
       <End Role="bids" EntitySet="bids" />
     </AssociationSet>
-    <AssociationSet Name="FK__bids__project_id__6CD828CA" Association="Self.FK__bids__project_id__6CD828CA">
+    <AssociationSet Name="FK__bids__project_id__0A688BB1" Association="Self.FK__bids__project_id__0A688BB1">
       <End Role="projects" EntitySet="projects" />
       <End Role="bids" EntitySet="bids" />
     </AssociationSet>
@@ -707,6 +780,22 @@
     <AssociationSet Name="FK__reviews_r__revie__6B24EA82" Association="Self.FK__reviews_r__revie__6B24EA82">
       <End Role="usersdata" EntitySet="usersdata" />
       <End Role="reviews_ratings" EntitySet="reviews_ratings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__takenproj__freel__1B9317B3" Association="Self.FK__takenproj__freel__1B9317B3">
+      <End Role="usersdata" EntitySet="usersdata" />
+      <End Role="takenprojects" EntitySet="takenprojects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__takenproj__proje__1C873BEC" Association="Self.FK__takenproj__proje__1C873BEC">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="takenprojects" EntitySet="takenprojects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__uploadedp__freel__1F63A897" Association="Self.FK__uploadedp__freel__1F63A897">
+      <End Role="usersdata" EntitySet="usersdata" />
+      <End Role="uploadedproject" EntitySet="uploadedproject" />
+    </AssociationSet>
+    <AssociationSet Name="FK__uploadedp__proje__2057CCD0" Association="Self.FK__uploadedp__proje__2057CCD0">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="uploadedproject" EntitySet="uploadedproject" />
     </AssociationSet>
     <AssociationSet Name="FK__user_prof__user___1BC821DD" Association="Self.FK__user_prof__user___1BC821DD">
       <End Role="usersdata" EntitySet="usersdata" />

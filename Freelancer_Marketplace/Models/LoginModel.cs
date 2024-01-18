@@ -15,9 +15,13 @@ namespace Freelancer_Marketplace.Models
             {
                 using (var db = new Freelancer_Marketplace_DBEntities())
                 {
-                    var temp = db.usersdatas.FirstOrDefault(x => x.username == user_data.Username && x.userpassword == user_data.Userpass);
-                    if (temp != null)
-                    { 
+                    var user = db.usersdatas.FirstOrDefault(x => x.username == user_data.Username && x.userpassword == user_data.Userpass);
+                    if (user != null)
+                    {
+                        // Add user details to session
+                        HttpContext.Current.Session["UserId"] = user.userid;
+                        HttpContext.Current.Session["Username"] = user.username;
+
                         return true;
                     }
 

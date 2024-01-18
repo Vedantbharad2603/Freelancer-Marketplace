@@ -19,6 +19,7 @@ namespace Freelancer_Marketplace.Entity
         public int freelancer_id { get; set; }
         public decimal bid_amount { get; set; }
         public string proposal_text { get; set; }
+        public Nullable<bool> isapproved { get; set; }
         public Nullable<System.DateTime> bidstime { get; set; }
     
         public virtual usersdata usersdata { get; set; }

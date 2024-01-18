@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3481baa02c8346289d8be07dbe199f50" Name="Diagram1">
+      <Diagram DiagramId="b08deed6864841f1884e5d26d2f00ca2" Name="Diagram1" ZoomLevel="118">
         <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.bid" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.calendar_events" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.chatmessage" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.project" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.reported_issues" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.reviews_ratings" Width="1.5" PointX="3" PointY="23.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.user_profiles" Width="1.5" PointX="3" PointY="27.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.usersdata" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
-        <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__bids__freelancer__6DCC4D03" ManuallyRouted="false" />
-        <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__bids__project_id__6CD828CA" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.calendar_events" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.chatmessage" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.project" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.reported_issues" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.reviews_ratings" Width="1.5" PointX="3" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.user_profiles" Width="1.5" PointX="3" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.usersdata" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__bids__freelancer__0B5CAFEA" ManuallyRouted="false" />
+        <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__bids__project_id__0A688BB1" ManuallyRouted="false" />
         <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__calendar___useri__14270015" ManuallyRouted="false" />
         <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__calendar___useri__3587F3E0" ManuallyRouted="false" />
         <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__calendar___useri__367C1819" ManuallyRouted="false" />
@@ -48,6 +48,12 @@
         <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__user_prof__user___44CA3770" ManuallyRouted="false" />
         <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__user_prof__user___45BE5BA9" ManuallyRouted="false" />
         <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__user_prof__user___7F2BE32F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.takenproject" Width="1.5" PointX="5.25" PointY="18" />
+        <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__takenproj__proje__1C873BEC" />
+        <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__takenproj__freel__1B9317B3" />
+        <EntityTypeShape EntityType="Freelancer_Marketplace_DBModel.uploadedproject" Width="1.5" PointX="8.25" PointY="14.875" />
+        <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__uploadedp__proje__2057CCD0" />
+        <AssociationConnector Association="Freelancer_Marketplace_DBModel.FK__uploadedp__freel__1F63A897" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

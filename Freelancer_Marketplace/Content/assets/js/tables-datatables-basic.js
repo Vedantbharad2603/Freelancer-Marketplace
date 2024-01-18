@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
               message: 'Joining Date is required'
             },
             date: {
-              format: 'MM/DD/YYYY',
+              format: 'dd/MM/yyyy',
               message: 'The value is not a valid date'
             }
           }
